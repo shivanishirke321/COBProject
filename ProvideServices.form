@@ -1,0 +1,75 @@
+{
+  "components": [
+    {
+      "label": "Name of the customer",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_0cr03fq",
+        "columns": null
+      },
+      "id": "Field_0csyzp8",
+      "key": "textfield_4zy4ui",
+      "defaultValue": "Riya"
+    },
+    {
+      "label": "Customer's Account number",
+      "type": "number",
+      "layout": {
+        "row": "Row_0o517p2",
+        "columns": null
+      },
+      "id": "Field_1ai1pvv",
+      "key": "number_76yni",
+      "defaultValue": 501000298213
+    },
+    {
+      "values": [
+        {
+          "label": "Demat Account",
+          "value": "demataccount"
+        },
+        {
+          "label": "NRI Account",
+          "value": "nri"
+        },
+        {
+          "label": "Credit Card",
+          "value": "creditcard"
+        },
+        {
+          "label": "Cheque Book",
+          "value": "chequebook"
+        },
+        {
+          "label": "Loan",
+          "value": "loan"
+        },
+        {
+          "label": "Insurance Policy",
+          "value": "insurance"
+        },
+        {
+          "label": "Brokerage Account",
+          "value": "brokrage"
+        }
+      ],
+      "label": "Type of services:",
+      "type": "radio",
+      "layout": {
+        "row": "Row_07dgp1x",
+        "columns": null
+      },
+      "id": "Field_1uslhx0",
+      "key": "typesOfServices"
+    }
+  ],
+  "type": "default",
+  "id": "Provide_services",
+  "exporter": {
+    "name": "Camunda Modeler",
+    "version": "5.21.0"
+  },
+  "executionPlatform": "Camunda Platform",
+  "executionPlatformVersion": "7.20.0",
+  "schemaVersion": 15
+}

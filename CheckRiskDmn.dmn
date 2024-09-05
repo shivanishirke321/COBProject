@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:modeler="http://camunda.org/schema/modeler/1.0" xmlns:camunda="http://camunda.org/schema/1.0/dmn" id="RiskCheck" name="Risk Check" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="5.21.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.20.0">
+  <decision id="Check_risk" name="Check risk" camunda:historyTimeToLive="P180D">
+    <decisionTable id="DecisionTable_0pfvwwv" hitPolicy="FIRST">
+      <input id="Input_1" label="age" camunda:inputVariable="age">
+        <inputExpression id="InputExpression_1" typeRef="long">
+          <text></text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_1mifb62" label="employment" camunda:inputVariable="employment">
+        <inputExpression id="LiteralExpression_1a7i0o6" typeRef="string">
+          <text></text>
+        </inputExpression>
+        <inputValues id="UnaryTests_19benlm">
+          <text>"self - employeed","salaried","freelancer","unemployeed"</text>
+        </inputValues>
+      </input>
+      <input id="InputClause_0xbyyuf" label="income" camunda:inputVariable="income">
+        <inputExpression id="LiteralExpression_0rnhllu" typeRef="long">
+          <text></text>
+        </inputExpression>
+      </input>
+      <output id="Output_1" label="riskLevel" typeRef="string" />
+      <rule id="DecisionRule_0149rrt">
+        <inputEntry id="UnaryTests_07frv22">
+          <text>&lt;= 30</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1ekqzj2">
+          <text>"self - employeed"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1jknira">
+          <text>&gt;= 40000</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0zvprpx">
+          <text>"no risk"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1ky2s01">
+        <inputEntry id="UnaryTests_0ld1chr">
+          <text>&lt;=30</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1t8ae1n">
+          <text>"salaried"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_114p1jr">
+          <text>&lt;=15000</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0u7n8iq">
+          <text>"moderate risk"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0embtci">
+        <inputEntry id="UnaryTests_0u5ytgo">
+          <text>&lt;=30</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_10qc14h">
+          <text>"freelancer"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_02pmxzx">
+          <text>&gt;=40000</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1t7q4ye">
+          <text>"no risk"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_14f6q1z">
+        <inputEntry id="UnaryTests_0sqnm0b">
+          <text>&gt;30</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_06hjluu">
+          <text>"self - employeed"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_147lshi">
+          <text>&lt;=30000</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0v8s1oz">
+          <text>"no risk"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_05szm9i">
+        <inputEntry id="UnaryTests_0qf6pff">
+          <text>&gt;30</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_06as5t6">
+          <text>"freelancer"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1ddd19h">
+          <text>&lt;=15000</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1a1nub4">
+          <text>"moderate risk"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1m5bld9">
+        <inputEntry id="UnaryTests_0hiboot">
+          <text>&gt;30</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_01tdcrv">
+          <text>"freelancer"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0uswu48">
+          <text>&lt;= 40000</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1diy4n2">
+          <text>"moderate risk"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_18jjb79">
+        <inputEntry id="UnaryTests_0icrofx">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1h3t1hj">
+          <text>"self - employeed","salaried"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0sep9be">
+          <text>-</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0bcu2qv">
+          <text>"no risk"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1tisoo6">
+        <inputEntry id="UnaryTests_0upas5l">
+          <text>-</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0ck8hm1">
+          <text>"unemployeed"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0ncim64">
+          <text>-</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1icqvjd">
+          <text>"severe risk"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0py6cbs">
+        <inputEntry id="UnaryTests_1n5n91x">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1u95w6y">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_12z0yeg">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0a47d2w">
+          <text></text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram>
+      <dmndi:DMNShape dmnElementRef="Check_risk">
+        <dc:Bounds height="80" width="180" x="160" y="100" />
+      </dmndi:DMNShape>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
+</definitions>

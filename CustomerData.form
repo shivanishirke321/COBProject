@@ -1,0 +1,68 @@
+{
+  "components": [
+    {
+      "label": "Full name",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_1clsadu",
+        "columns": null
+      },
+      "id": "Field_0r0y436",
+      "key": "fullName",
+      "defaultValue": "Sia"
+    },
+    {
+      "label": "Contact number",
+      "type": "number",
+      "layout": {
+        "row": "Row_09mxy2s",
+        "columns": null
+      },
+      "id": "Field_1clg7x8",
+      "key": "contactNumber",
+      "defaultValue": 8971616151
+    },
+    {
+      "label": "Address ",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_1qgkqxc",
+        "columns": null
+      },
+      "id": "Field_1yu806p",
+      "key": "address",
+      "defaultValue": "Pune"
+    },
+    {
+      "label": "Adhar Number ",
+      "type": "number",
+      "layout": {
+        "row": "Row_0qcvth7",
+        "columns": null
+      },
+      "id": "Field_1a7xvtu",
+      "key": "adharCard",
+      "defaultValue": 12345681710
+    },
+    {
+      "label": "Pan Card number ",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_0e4hs2m",
+        "columns": null
+      },
+      "id": "Field_0rbl3f3",
+      "key": "panCardNumber",
+      "defaultValue": "AJYJAA1235671"
+    }
+  ],
+  "type": "default",
+  "id": "Customer_Data",
+  "exporter": {
+    "name": "Camunda Modeler",
+    "version": "5.21.0"
+  },
+  "executionPlatform": "Camunda Platform",
+  "executionPlatformVersion": "7.20.0",
+  "schemaVersion": 15
+}

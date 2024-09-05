@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:modeler="http://camunda.org/schema/modeler/1.0" id="Definitions_1qc6udf" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="5.21.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.20.0">
+  <bpmn:escalation id="Escalation_0m2gcp4" name="Notify customer" />
+  <bpmn:collaboration id="KYC-Check-Process">
+    <bpmn:participant id="KYC-CheckProcess" name="KYC Check" processRef="KYCCheckProcess" />
+  </bpmn:collaboration>
+  <bpmn:process id="KYCCheckProcess" name="KYC check " isExecutable="true" camunda:historyTimeToLive="P180D">
+    <bpmn:endEvent id="KYCCompletedEndEvent" name="KYC completed">
+      <bpmn:incoming>Flow_1l07mbb</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:exclusiveGateway id="VerifiedGateway" name="verified?" default="FalseSequenceFlow">
+      <bpmn:incoming>Flow_1b290qz</bpmn:incoming>
+      <bpmn:outgoing>TrueSequenceFlow</bpmn:outgoing>
+      <bpmn:outgoing>FalseSequenceFlow</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:userTask id="ReviewByComplianceOfficerTask" name="Review by compliance officer">
+      <bpmn:extensionElements>
+        <camunda:taskListener delegateExpression="${assignTask}" event="assignment" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>FalseSequenceFlow</bpmn:incoming>
+    </bpmn:userTask>
+    <bpmn:startEvent id="ApplicatonReceivedStartEvent" name="Applicaton received">
+      <bpmn:outgoing>Flow_1fr4crt</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:boundaryEvent id="Event_07qkezj" attachedToRef="ReviewByComplianceOfficerTask">
+      <bpmn:outgoing>Flow_1sqznn2</bpmn:outgoing>
+      <bpmn:escalationEventDefinition id="EscalationEventDefinition_1ed2pcr" escalationRef="Escalation_0m2gcp4" />
+    </bpmn:boundaryEvent>
+    <bpmn:sequenceFlow id="Flow_1l07mbb" sourceRef="ApproveApplicationTask" targetRef="KYCCompletedEndEvent" />
+    <bpmn:sequenceFlow id="Flow_1wrc4bh" sourceRef="RejectApplicationTask" targetRef="KYCRejectedEndEvent" />
+    <bpmn:sequenceFlow id="Flow_1b290qz" sourceRef="VerifyDocumentTask" targetRef="VerifiedGateway" />
+    <bpmn:sequenceFlow id="TrueSequenceFlow" name="true" sourceRef="VerifiedGateway" targetRef="ApproveApplicationTask">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${documentVerificationStatus== "true"}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="FalseSequenceFlow" name="false" sourceRef="VerifiedGateway" targetRef="ReviewByComplianceOfficerTask" />
+    <bpmn:sequenceFlow id="Flow_1sqznn2" sourceRef="Event_07qkezj" targetRef="RejectApplicationTask" />
+    <bpmn:sequenceFlow id="Flow_1fr4crt" sourceRef="ApplicatonReceivedStartEvent" targetRef="VerifyDocumentTask" />
+    <bpmn:endEvent id="KYCRejectedEndEvent" name="KYC rejected">
+      <bpmn:incoming>Flow_1wrc4bh</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:serviceTask id="VerifyDocumentTask" name="Verify document" camunda:delegateExpression="${verifyDocument}">
+      <bpmn:incoming>Flow_1fr4crt</bpmn:incoming>
+      <bpmn:outgoing>Flow_1b290qz</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sendTask id="RejectApplicationTask" name="Reject application" camunda:delegateExpression="${rejectApplication}">
+      <bpmn:incoming>Flow_1sqznn2</bpmn:incoming>
+      <bpmn:outgoing>Flow_1wrc4bh</bpmn:outgoing>
+    </bpmn:sendTask>
+    <bpmn:serviceTask id="ApproveApplicationTask" name="Approve application" camunda:delegateExpression="${approveKYC}">
+      <bpmn:incoming>TrueSequenceFlow</bpmn:incoming>
+      <bpmn:outgoing>Flow_1l07mbb</bpmn:outgoing>
+    </bpmn:serviceTask>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="KYC-Check-Process">
+      <bpmndi:BPMNShape id="Participant_0wk76xr_di" bpmnElement="KYC-CheckProcess" isHorizontal="true">
+        <dc:Bounds x="160" y="60" width="780" height="420" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_1vtca50" bpmnElement="KYCCompletedEndEvent">
+        <dc:Bounds x="712" y="102" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="694" y="145" width="77" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_1865d0j" bpmnElement="VerifiedGateway" isMarkerVisible="true">
+        <dc:Bounds x="465" y="192" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="530" y="210" width="42" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_1awnu7n" bpmnElement="ReviewByComplianceOfficerTask">
+        <dc:Bounds x="560" y="260" width="100" height="80" />
+        <bpmndi:BPMNLabel />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_14s5ps8_di" bpmnElement="ApplicatonReceivedStartEvent">
+        <dc:Bounds x="212" y="199" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="205" y="242" width="51" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_109teeu" bpmnElement="KYCRejectedEndEvent">
+        <dc:Bounds x="852" y="382" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="841" y="425" width="66" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0ox70cu_di" bpmnElement="VerifyDocumentTask">
+        <dc:Bounds x="310" y="177" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0l2tioo_di" bpmnElement="RejectApplicationTask">
+        <dc:Bounds x="710" y="360" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_126vkyl_di" bpmnElement="ApproveApplicationTask">
+        <dc:Bounds x="560" y="80" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_0p7fsqx" bpmnElement="Event_07qkezj">
+        <dc:Bounds x="642" y="322" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="BPMNEdge_1n0h3tg" bpmnElement="Flow_1l07mbb">
+        <di:waypoint x="660" y="120" />
+        <di:waypoint x="712" y="120" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_1fl8jy9" bpmnElement="Flow_1wrc4bh">
+        <di:waypoint x="810" y="400" />
+        <di:waypoint x="852" y="400" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_0yk5h67" bpmnElement="Flow_1b290qz">
+        <di:waypoint x="410" y="217" />
+        <di:waypoint x="465" y="217" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_1swnqzu" bpmnElement="TrueSequenceFlow">
+        <di:waypoint x="490" y="192" />
+        <di:waypoint x="490" y="120" />
+        <di:waypoint x="560" y="120" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="496" y="153" width="19" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_1rvmh3k" bpmnElement="FalseSequenceFlow">
+        <di:waypoint x="490" y="242" />
+        <di:waypoint x="490" y="300" />
+        <di:waypoint x="560" y="300" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="494" y="268" width="23" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_077j9dq" bpmnElement="Flow_1sqznn2">
+        <di:waypoint x="660" y="358" />
+        <di:waypoint x="660" y="400" />
+        <di:waypoint x="710" y="400" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1fr4crt_di" bpmnElement="Flow_1fr4crt">
+        <di:waypoint x="248" y="217" />
+        <di:waypoint x="310" y="217" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

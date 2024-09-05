@@ -1,0 +1,68 @@
+{
+  "components": [
+    {
+      "label": "Name of the customer",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_0knkkkz",
+        "columns": null
+      },
+      "id": "Field_0rm6irj",
+      "key": "textfield_qgrogk",
+      "defaultValue": "Ram"
+    },
+    {
+      "label": "Enter your email",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_0wr93gc",
+        "columns": null
+      },
+      "id": "Field_0r8ndet",
+      "key": "textfield_ygc147",
+      "defaultValue": "abc@abc.com"
+    },
+    {
+      "label": "Contact Number",
+      "type": "number",
+      "layout": {
+        "row": "Row_0gx3v99",
+        "columns": null
+      },
+      "id": "Field_1irtgb6",
+      "key": "number_19jzbb",
+      "defaultValue": 2341589101
+    },
+    {
+      "label": "How do you like our services?",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_1psh1nw",
+        "columns": null
+      },
+      "id": "Field_01ywcko",
+      "key": "textfield_wx2ylp",
+      "defaultValue": "Good"
+    },
+    {
+      "label": "Would you like to give any suggestions for better services?",
+      "type": "textfield",
+      "layout": {
+        "row": "Row_0n82ews",
+        "columns": null
+      },
+      "id": "Field_1v5o2t5",
+      "key": "textfield_4wi1bd",
+      "defaultValue": "no"
+    }
+  ],
+  "type": "default",
+  "id": "Customer_feedback",
+  "exporter": {
+    "name": "Camunda Modeler",
+    "version": "5.21.0"
+  },
+  "executionPlatform": "Camunda Platform",
+  "executionPlatformVersion": "7.20.0",
+  "schemaVersion": 15
+}
